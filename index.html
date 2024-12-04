@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ασκήσεις Geogebra</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1 class="main-title">Ασκήσεις Geogebra</h1>
+    <div class="cards-container">
+        <div class="button-container">
+            <img class="buttonimage" src="./img/asks6.png" alt="Exercise Image 1">
+            <p class="buttontext">ΑΣΚΗΣΗ 6 ΣΧΟΛΙΚΟΥ ΒΙΒΛΙΟΥ</p>
+            <button class="gray-button" id="btn-url-1">
+                <img src="./img/NEWTAB.png" alt="Gray Button Icon" class="button-icon">
+                Άνοιγμα άσκησης
+            </button>
+            <button class="custom-button">
+                <img src="./img/QRICON.webp" alt="QR Code Icon" class="button-icon">
+                Άνοιγμα QR Code
+            </button>
+        </div>
+        <div class="button-container">
+            <img class="buttonimage" src="./img/asks7.png" alt="Exercise Image 2">
+            <p class="buttontext">ΑΣΚΗΣΗ 7 ΣΧΟΛΙΚΟΥ ΒΙΒΛΙΟΥ</p>
+            <button class="gray-button" id="btn-url-2">
+                <img src="./img/NEWTAB.png" alt="Gray Button Icon" class="button-icon">
+                Άνοιγμα άσκησης
+            </button>
+            <button class="custom-button">
+                <img src="./img/QRICON.webp" alt="QR Code Icon" class="button-icon">
+                Άνοιγμα QR Code
+            </button>
+        </div>
+        <div class="button-container">
+            <img class="buttonimage" src="./img/bolzorias.png" alt="Exercise Image 3">
+            <p class="buttontext">BOLZANO ΜΕ ΟΡΙΑ</p>
+            <button class="gray-button" id="btn-url-3">
+                <img src="./img/NEWTAB.png" alt="Gray Button Icon" class="button-icon">
+                Άνοιγμα άσκησης
+            </button>
+            <button class="custom-button">
+                <img src="./img/QRICON.webp" alt="QR Code Icon" class="button-icon">
+                Άνοιγμα QR Code
+            </button>
+        </div>
+    </div>
+
+    <div id="qr-overlay" class="qr-overlay hidden">
+        <h2 id="qr-title" class="qr-title">Exercise Title</h2> <!-- Title for the exercise -->
+        <img id="qr-image" src="" alt="QR Code">
+        <button id="close-button" class="close-button">
+            <img src="./img/RETURN.png" alt="Close Icon" class="button-icon">
+            Επιστροφή
+        </button>
+    </div>
+    
+    
+    
+    <script>
+       // QR Code Mapping (Assign each green button a QR code URL and exercise name)
+const qrCodeMapping = {
+    "btn-qr-1": { src: "./img/ASK6.png", title: "ΑΣΚΗΣΗ 6 ΣΧΟΛΙΚΟΥ ΒΙΒΛΙΟΥ" },
+    "btn-qr-2": { src: "./img/ASK7.png", title: "ΑΣΚΗΣΗ 7 ΣΧΟΛΙΚΟΥ ΒΙΒΛΙΟΥ" },
+    "btn-qr-3": { src: "./img/BOLZORIA.png", title: "BOLZANO ΜΕ ΟΡΙΑ" }
+};
+
+// Grab necessary elements
+const qrOverlay = document.getElementById("qr-overlay");
+const qrImage = document.getElementById("qr-image");
+const qrTitle = document.getElementById("qr-title"); // Get the title element
+const closeButton = document.getElementById("close-button");
+
+// Show QR overlay
+function showQrOverlay(buttonId) {
+    const qrData = qrCodeMapping[buttonId]; // Get the QR code data
+    if (qrData) {
+        qrImage.src = qrData.src; // Set the QR code image
+        qrTitle.textContent = qrData.title; // Set the exercise title
+        qrOverlay.classList.remove("hidden"); // Show the overlay
+    }
+}
+
+// Hide QR overlay
+function hideQrOverlay() {
+    qrOverlay.classList.add("hidden"); // Hide the overlay
+    qrImage.src = ""; // Clear the QR code image
+    qrTitle.textContent = ""; // Clear the exercise title
+}
+
+// Add event listeners to green buttons
+document.querySelectorAll(".custom-button").forEach((button, index) => {
+    const buttonId = `btn-qr-${index + 1}`; // Assign an ID to each button
+    button.id = buttonId; // Set the ID attribute
+    button.addEventListener("click", () => showQrOverlay(buttonId));
+});
+
+// Add event listener to the close button
+closeButton.addEventListener("click", hideQrOverlay);
+
+// URL Mapping for Gray Buttons
+const urlMapping = {
+    "btn-url-1": "https://www.geogebra.org/m/tfvutwdn", // Replace with the URL for Exercise 1
+    "btn-url-2": "https://www.geogebra.org/m/rk67n6us", // Replace with the URL for Exercise 2
+    "btn-url-3": "https://www.geogebra.org/m/uudmhwqs"  // Replace with the URL for Exercise 3
+};
+
+// Add event listeners to gray buttons
+document.querySelectorAll(".gray-button").forEach((button, index) => {
+    const buttonId = `btn-url-${index + 1}`; // Match the button ID
+    button.id = buttonId; // Assign the ID attribute
+    button.addEventListener("click", () => {
+        const url = urlMapping[buttonId]; // Get the URL for the button
+        if (url) {
+            window.open(url, "_blank"); // Open the URL in a new tab
+        } else {
+            console.error("No URL found for button:", buttonId); // Debugging in case of missing URL
+        }
+    });
+});
+
+    </script>
+    
+    
+</body>
+</html>
