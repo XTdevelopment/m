@@ -117,6 +117,7 @@ body {
     width: 23%; /* Make the QR code responsive */
     height: auto; /* Maintain aspect ratio */
     margin-bottom: 4%;
+    border: 20px solid #ffffff;
 }
 
 .qr-title {
